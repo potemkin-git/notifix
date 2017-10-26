@@ -1,4 +1,12 @@
 var map;
+var infoclosed = true;
+var jamLayer = new google.maps.Data();
+var accidentLayer = new google.maps.Data();
+var policeLayer = new google.maps.Data();
+var masterLayer = [jamLayer, accidentLayer, policeLayer];
+
+initMap();
+initLayers();
 
 function initMap() {
     if (navigator.geolocation) {
@@ -25,7 +33,7 @@ function initSearchBox(map) {
     var inputModal = document.getElementById('searchInputModal');
     var searchBoxModal = new google.maps.places.SearchBox(inputModal);
 
-    map.controls[google.maps.ControlPosition.TOP_LEFT].push(input);
+    map.controls[google.maps.ControlPosition.TOP_CENTER].push(input);
 
     map.addListener('bounds_changed', function() {
         searchBox.setBounds(map.getBounds());
@@ -73,7 +81,57 @@ function showMe(myLat,myLong) {
     });
 }
 
+function initLayers() {
 
+    masterLayer.forEach(function (layer) {
 
+        layer.setStyle(function(feature) {
+            return {
+                icon: {
+                    url: "media/"+feature.getProperty('notif').type+".png",
+                    scaledSize: new google.maps.Size(40, 40)
+                },
+                cursor: 'pointer'
+            }
+        })
+
+        layer.addListener('click', function (elem) {
+            var infowindow = elem.feature.getProperty('infoWindow');
+            var infowindowShort = elem.feature.getProperty('infoWindowShort');
+            var notif = elem.feature.getProperty('notif');
+
+            if (typeof( window.infoopened ) != 'undefined') infoopened.close();
+            infowindow.open(map);
+            infowindowShort.close();
+            infoopened = infowindow;
+            infoclosed = false;
+
+            google.maps.event.addListener(infowindow, 'domready', function () {
+                $('#thumbUp').click(function () {
+                    notif.nbConf++;
+                });
+                $('#thumbDown').click(function () {
+                    notif.nbConf--;
+                });
+            });
+
+            google.maps.event.addListener(infowindow, 'closeclick', function () {
+                infoclosed = true;
+            });
+        })
+
+        layer.addListener('mouseover', function (elem) {
+            var infowindowShort = elem.feature.getProperty('infoWindowShort');
+            if (!infoclosed) return;
+            infowindowShort.open(map);
+        })
+
+        layer.addListener('mouseout', function (elem) {
+            var infowindowShort = elem.feature.getProperty('infoWindowShort');
+            infowindowShort.close();
+        })
+
+    })
+}
 
 

@@ -43,9 +43,10 @@ html, body {
     font-size: 15px;
     font-weight: 300;
     margin-left: 12px;
+    margin-top: 10px;
     padding: 0 11px 0 13px;
     text-overflow: ellipsis;
-    width: 300px;
+    width: 500px;
 }
 
 #searchInput:focus {
@@ -55,11 +56,23 @@ html, body {
 #addEvent {
     position: absolute;
     bottom: 15px;
-    left: 15px;
+    left: 50%;
+    margin-left: -40px;
+    width: 80px;
+    height: 80px;
+    box-shadow: 3px 3px 10px #000;
+    opacity: 0.8;
+}
+
+#addEvent:hover {
+    opacity: 1;
+    transform: scale(1.075);
 }
 
 #addEvent i {
     font-style: normal;
+    line-height: 80px;
+    font-size: 3.5rem;
 }
 
 #optionalModal {
@@ -77,4 +90,47 @@ html, body {
 #imgTypes {
     display: flex;
     justify-content: space-around;
+}
+
+#toggleFilter {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 10px;
+    height: 400px;
+    margin-top: -200px;
+    background-color: #FFF;
+    z-index: 10000;
+    border-radius: 0 20px 20px 0;
+}
+
+#toggleFilterBtn {
+    position: absolute;
+    right: -30px;
+    top: 50%;
+    height: 50px;
+    margin-top: -25px;
+    transition: rotate 1s;
+}
+
+#toggleFilterBtn:hover {
+    cursor: pointer;
+}
+
+.filterCheckbox {
+    display: none;
+    padding-left: 15px;
+}
+
+#incrementor {
+    display: flex;
+    justify-content: space-around;
+}
+
+#incrementor img {
+    height: 30px;
+}
+
+#incrementor img:hover {
+    cursor: pointer;
 }

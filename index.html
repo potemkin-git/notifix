@@ -16,8 +16,36 @@
 
 <body>
 
-<a id="addEvent" class="btn-floating btn-large waves-effect waves-light red"><i class="material-icons">+</i></a>
+<a id="addEvent" class="btn-floating btn-large waves-effect waves-light red" title="Something happened?"><i class="material-icons">+</i></a>
 
+<nav id="toggleFilter">
+    <img id="toggleFilterBtn" src="media/toggleBtn.png" alt="">
+    <div class="filterCheckbox">
+        <div class="switch">
+            <label style="display: block">Bouchons</label>
+            <label>
+                Off
+                <input type="checkbox" id="jamFilter" checked="checked" />
+                <span class="lever"></span>
+                On
+            </label>
+            <label style="display: block">Accident</label>
+            <label>
+                Off
+                <input type="checkbox" id="accidentFilter" checked="checked"/>
+                <span class="lever"></span>
+                On
+            </label>
+            <label style="display: block">Police</label>
+            <label>
+                Off
+                <input type="checkbox" id="policeFilter" checked="checked"/>
+                <span class="lever"></span>
+                On
+            </label>
+        </div>
+    </div>
+</nav>
 
 <div id="map"></div>
 <input type="text" id="searchInput" class="controls" placeholder="Search for a place">
@@ -25,7 +53,7 @@
 
 <div id="addNotif" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <h4>Que se passe-t-il?</h4>
+        <h4>What's going on?</h4>
         <div class="row">
             <form id="formNotif" class="col s12">
                 <div id="optionalModal" class="row">
@@ -34,7 +62,7 @@
                         <input id="coordsData" data-lat="" data-long="" type="text" style="display: none;">
                     </div>
                 </div>
-                <div class="input-field col s12">
+                <div id="latLngInput" class="input-field col s12" style="display: none">
                     <input type="text" id="latForm" class="coordForm col s5" placeholder="Latitude">
                     <input type="text" id="lngForm" class="coordForm col s5 offset-s1" placeholder="Longitude" >
                 </div>
@@ -52,11 +80,11 @@
                 <div class="row">
                     <div class="col s5">
                         <label>Date</label>
-                        <input  id="dateInput" type="text" class="datepicker" placeholder="When did it occured?">
+                        <input id="dateInput" type="text" class="datepicker" placeholder="When did it occured?">
                     </div>
                     <div class="col s5 offset-s1">
                         <label>Hour</label>
-                        <input  id="hourInput" type="text" class="timepicker" placeholder="At what time?">
+                        <input id="timeInput" type="text" class="timepicker" placeholder="At what time?">
                     </div>
                 </div>
                 <div class="row">
@@ -77,6 +105,7 @@
 
 
 
+<!--<script src="vendors/markerclusterer.js"></script>-->
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ8oRX_6L0YwjDwBEB8DvaBulOEA3r1ow&libraries=places"></script>
 <script src="js/notification.js"></script>
 <script src="js/init.js"></script>

@@ -1,6 +1,3 @@
-var infoclosed = true;
-initMap();
-
 $(document).ready(function () {
     // the "href" attribute of the modal trigger must specify the modal ID that wants to be triggered
     $('.modal').modal();
@@ -33,13 +30,11 @@ function getFormInfo() {
     infos.lat = $('#latForm').val();
     infos.lng = $('#lngForm').val();
     infos.date = $('#dateInput').val() /*.pickadate()*/;
-    infos.hour = $('#hourInput').val();
+    infos.time = $('#timeInput').val();
     infos.desc = $('#descEvent').val();
     var currLat = $('#coordsData').attr('data-lat');
     var currLong = $('#coordsData').attr('data-long');
 
-    console.log(infos.lat);
-    console.log(infos.lng);
     if (infos.lat != null && infos.lng != null){
         if (!isNaN(parseFloat(infos.lat))
             && !isNaN(parseFloat(infos.lng))
@@ -52,7 +47,7 @@ function getFormInfo() {
         }
     }
 
-    var notif = new Notification(infos.type, infos.desc, infos.date, infos.time, currLat, currLong);
+    var notif = new Notification(null, null, infos.type, infos.desc, infos.date, infos.time, currLat, currLong, null);
 
     return notif;
 }
@@ -64,66 +59,47 @@ function clearForm() {
 
 function addMarker(notif) {
 
-    var src = "media/";
-    switch (notif.type) {
-        case 'jam':
-            src += 'jam.png'
-            break;
-        case 'accident':
-            src += 'accident.png'
-            break;
-        case 'police':
-            src += 'police.png'
-            break;
-    }
-
-    var marker = new google.maps.Marker({
-        map: map,
-        icon: {url: src, scaledSize: new google.maps.Size(40, 40)},
-        position: notif.coord,
-        animation: google.maps.Animation.DROP
-    });
-
     var infowindowData =
         "<p>Type: " + notif.type + "</p>"+
         "<p>Description: " + notif.desc + "</p>"+
         "<p>Date: " + notif.date + "</p>"+
-        "<p>Time: " + notif.hour + "</p>"+
-        "<p>Où: " + notif.coord + "</p>";
-
-    var infowindow = new google.maps.InfoWindow({
-        content: infowindowData
-    });
-
-    marker.addListener('click', function () {
-        if (typeof( window.infoopened ) != 'undefined') infoopened.close();
-
-        infowindow.open(map,marker);
-        infowindowShort.close();
-        infoopened = infowindow;
-        infoclosed = false;
-    });
-
-    google.maps.event.addListener(infowindow, 'closeclick', function () {
-        infoclosed = true;
-    });
+        "<p>Time: " + notif.time + "</p>"+
+        "<p>Où: " + notif.coord + "</p>"+
+        "<p id='incrementor'><img id='thumbUp' src='media/thumbUp.png' alt=''><img id='thumbDown' src='media/thumbDown.png' alt=''></p>";
 
     var infowindowShortData =
         "<p>Type: " + notif.type + "</p>"+
-        "<p>Description: " + notif.desc + "</p>";
+        "<p>Description: " + notif.desc + "</p>"+
+        "<p>Confirmations: " + notif.nbConf + "</p>";
 
-    var infowindowShort = new google.maps.InfoWindow({
-        content: infowindowShortData
+    var infowindow = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, -30)});
+    infowindow.setContent(infowindowData);
+    infowindow.setPosition(notif.coord);
+
+    var infowindowShort = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, -30)});
+    infowindowShort.setContent(infowindowShortData);
+    infowindowShort.setPosition(notif.coord);
+
+    var marker = new google.maps.Data.Feature({
+        geometry: notif.coord,
+        properties: {
+            infoWindow: infowindow,
+            infoWindowShort: infowindowShort,
+            notif: notif
+        }
     });
 
-    marker.addListener('mouseover', function () {
-        if (!infoclosed) return;
-        infowindowShort.open(map,marker);
-    });
-
-    marker.addListener('mouseout', function () {
-        infowindowShort.close();
-    });
+    switch (notif.type) {
+        case 'jam':
+            jamLayer.add(marker);
+            break;
+        case 'accident':
+            accidentLayer.add(marker);
+            break;
+        case 'police':
+            policeLayer.add(marker);
+            break;
+    }
 
     map.panTo(notif.coord);
     map.setZoom(17);
