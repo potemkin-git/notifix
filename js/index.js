@@ -30,18 +30,26 @@ $(document).ready(function () {
 function getFormInfo() {
     var infos = [];
     infos.type = $('#resultType').val();
-    infos.lat = $('latForm').val();
-    infos.lng = $('lngForm').val();
+    infos.lat = $('#latForm').val();
+    infos.lng = $('#lngForm').val();
     infos.date = $('#dateInput').val() /*.pickadate()*/;
     infos.hour = $('#hourInput').val();
     infos.desc = $('#descEvent').val();
     var currLat = $('#coordsData').attr('data-lat');
     var currLong = $('#coordsData').attr('data-long');
 
+    console.log(infos.lat);
+    console.log(infos.lng);
     if (infos.lat != null && infos.lng != null){
-        //check format coordonnées
-        currLat = infos.lat;
-        currLong = infos.lng;
+        if (!isNaN(parseFloat(infos.lat))
+            && !isNaN(parseFloat(infos.lng))
+            && parseFloat(infos.lat) >= -90
+            && parseFloat(infos.lat) <= 90
+            && parseFloat(infos.lng) >= -180
+            && parseFloat(infos.lng) <= 180) {
+            currLat = parseFloat(infos.lat);
+            currLong = parseFloat(infos.lng);
+        }
     }
 
     var notif = new Notification(infos.type, infos.desc, infos.date, infos.time, currLat, currLong);
