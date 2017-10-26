@@ -17,3 +17,6 @@ notifs.forEach(function(notif) {
     console.log(notif);
     addMarker(notif);
 });
+
+
+console.log('Git is a lie');
