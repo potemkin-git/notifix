@@ -29,10 +29,14 @@
         <div class="row">
             <form id="formNotif" class="col s12">
                 <div id="optionalModal" class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s11">
                         <input type="text" id="searchInputModal" class="controls" placeholder="Search for a place" style="z-index: 5000;">
                         <input id="coordsData" data-lat="" data-long="" type="text" style="display: none;">
                     </div>
+                </div>
+                <div class="input-field col s12">
+                    <input type="text" id="latForm" class="coordForm col s5" placeholder="Latitude">
+                    <input type="text" id="lngForm" class="coordForm col s5 offset-s1" placeholder="Longitude" >
                 </div>
                 <div class="row">
                     <div class="col s12">
@@ -46,17 +50,17 @@
                     </div>
                 </div>
                 <div class="row">
-                    <div class="col s6">
+                    <div class="col s5">
                         <label>Date</label>
                         <input  id="dateInput" type="text" class="datepicker" placeholder="When did it occured?">
                     </div>
-                    <div class="col s6">
+                    <div class="col s5 offset-s1">
                         <label>Hour</label>
                         <input  id="hourInput" type="text" class="timepicker" placeholder="At what time?">
                     </div>
                 </div>
                 <div class="row">
-                    <div class="input-field col s12">
+                    <div class="input-field col s11">
                         <textarea placeholder="Description" id="descEvent" type="text" rows="10" wrap="hard"></textarea>
                     </div>
                 </div>

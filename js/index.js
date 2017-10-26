@@ -30,11 +30,19 @@ $(document).ready(function () {
 function getFormInfo() {
     var infos = [];
     infos.type = $('#resultType').val();
+    infos.lat = $('latForm').val();
+    infos.lng = $('lngForm').val();
     infos.date = $('#dateInput').val() /*.pickadate()*/;
     infos.hour = $('#hourInput').val();
     infos.desc = $('#descEvent').val();
     var currLat = $('#coordsData').attr('data-lat');
     var currLong = $('#coordsData').attr('data-long');
+
+    if (infos.lat != null && infos.lng != null){
+        //check format coordonnées
+        currLat = infos.lat;
+        currLong = infos.lng;
+    }
 
     var notif = new Notification(infos.type, infos.desc, infos.date, infos.time, currLat, currLong);
 
