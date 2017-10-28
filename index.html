@@ -20,30 +20,15 @@
 
 <nav id="toggleFilter">
     <img id="toggleFilterBtn" src="media/toggleBtn.png" alt="">
-    <div class="filterCheckbox">
-        <div class="switch">
-            <label style="display: block">Bouchons</label>
-            <label>
-                Off
-                <input type="checkbox" id="jamFilter" checked="checked" />
-                <span class="lever"></span>
-                On
-            </label>
-            <label style="display: block">Accident</label>
-            <label>
-                Off
-                <input type="checkbox" id="accidentFilter" checked="checked"/>
-                <span class="lever"></span>
-                On
-            </label>
-            <label style="display: block">Police</label>
-            <label>
-                Off
-                <input type="checkbox" id="policeFilter" checked="checked"/>
-                <span class="lever"></span>
-                On
-            </label>
-        </div>
+    <div id="filterCheckbox" class="switch">
+        <p>Display traffic jams</p>
+        <label>Off<input type="checkbox" id="jamFilter" checked="checked" /><span class="lever"></span>On</label>
+
+        <p>Display accidents</p>
+        <label>Off<input type="checkbox" id="accidentFilter" checked="checked"/><span class="lever"></span>On</label>
+
+        <p>Display police controls</p>
+        <label>Off<input type="checkbox" id="policeFilter" checked="checked"/><span class="lever"></span>On</label>
     </div>
 </nav>
 
@@ -56,13 +41,13 @@
         <h4>What's going on?</h4>
         <div class="row">
             <form id="formNotif" class="col s12">
-                <div id="optionalModal" class="row">
+                <div id="optionalSearchInput" class="row">
                     <div class="input-field col s11">
-                        <input type="text" id="searchInputModal" class="controls" placeholder="Search for a place" style="z-index: 5000;">
+                        <input type="text" id="searchInputModal" class="controls" placeholder="Search for a place">
                         <input id="coordsData" data-lat="" data-long="" type="text" style="display: none;">
                     </div>
                 </div>
-                <div id="latLngInput" class="input-field col s12" style="display: none">
+                <div id="optionnalLatLngInput" class="input-field col s12">
                     <input type="text" id="latForm" class="coordForm col s5" placeholder="Latitude">
                     <input type="text" id="lngForm" class="coordForm col s5 offset-s1" placeholder="Longitude" >
                 </div>
@@ -103,16 +88,12 @@
 
 
 
-
-
-<!--<script src="vendors/markerclusterer.js"></script>-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ8oRX_6L0YwjDwBEB8DvaBulOEA3r1ow&libraries=places"></script>
-<script src="js/notification.js"></script>
-<script src="js/init.js"></script>
 <script src="js/index.js"></script>
 <script src="js/eventListeners.js"></script>
+<script src="js/init.js"></script>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ8oRX_6L0YwjDwBEB8DvaBulOEA3r1ow&callback=initMap&libraries=places"></script>
+<script src="js/notification.js"></script>
 <script src="js/dataFakerLoadixRendererV1.js"></script>
-
 
 </body>
 

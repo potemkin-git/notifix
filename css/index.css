@@ -8,6 +8,11 @@ html, body {
     height: 100%;
 }
 
+#optionalSearchInput, #optionnalLatLngInput {
+    display: none;
+}
+
+/*******************************  MODAL CONTENT  *******************************/
 .typeSelection {
     display: inline-block;
     height: 50px;
@@ -26,6 +31,17 @@ html, body {
     border: 2px solid blue;
 }
 
+#imgTypes {
+    display: flex;
+    justify-content: space-around;
+}
+
+#addNotif textarea {
+    resize: none;
+}
+
+/*******************************  SEARCH PLACES INPUT  *******************************/
+
 .controls {
     margin-top: 10px;
     border: 1px solid transparent;
@@ -39,7 +55,7 @@ html, body {
 
 #searchInput {
     background-color: #fff;
-    font-family: Roboto;
+    font-family: Roboto, Georgia;
     font-size: 15px;
     font-weight: 300;
     margin-left: 12px;
@@ -52,6 +68,16 @@ html, body {
 #searchInput:focus {
     border-color: #4d90fe;
 }
+
+#searchInputModal {
+    z-index: 5000;
+}
+
+.pac-container {
+    z-index: 5000;
+}
+
+/*******************************  ADD EVENT BUTTON  *******************************/
 
 #addEvent {
     position: absolute;
@@ -75,52 +101,53 @@ html, body {
     font-size: 3.5rem;
 }
 
-#optionalModal {
-    display: none;
-}
-
-#addNotif textarea {
-    resize: none;
-}
-
-.pac-container {
-    z-index: 5000;
-}
-
-#imgTypes {
-    display: flex;
-    justify-content: space-around;
-}
+/*******************************  FILTERS TOGGLABLE TAB  *******************************/
 
 #toggleFilter {
     position: absolute;
     left: 0;
     top: 50%;
     width: 10px;
-    height: 400px;
-    margin-top: -200px;
+    height: 320px;
+    margin-top: -160px;
     background-color: #FFF;
     z-index: 10000;
     border-radius: 0 20px 20px 0;
+    box-shadow: 3px 4px 15px #323232;
 }
 
 #toggleFilterBtn {
     position: absolute;
-    right: -30px;
+    right: -17px;
     top: 50%;
-    height: 50px;
-    margin-top: -25px;
-    transition: rotate 1s;
+    height: 30px;
+    margin-top: -15px;
 }
 
 #toggleFilterBtn:hover {
     cursor: pointer;
 }
 
-.filterCheckbox {
+#filterCheckbox {
     display: none;
-    padding-left: 15px;
+    flex-direction: column;
+    justify-content: center;
+    height: 100%;
 }
+
+#filterCheckbox p {
+    color: #000;
+    font-size: 13px;
+    text-align: center;
+    margin: 0;
+    line-height: 20px;
+}
+
+#filterCheckbox label {
+    text-align: center;
+}
+
+/*******************************  THUMBS UP/DOWN IN INFOWINDOW  *******************************/
 
 #incrementor {
     display: flex;

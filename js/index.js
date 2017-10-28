@@ -20,20 +20,19 @@ $(document).ready(function () {
         canceltext: 'Cancel', // Text for cancel-button
         autoclose: true, // automatic close timepicker
         ampmclickable: true, // make AM PM clickable
-        aftershow: function(){} //Function for after opening timepicker
     });
 });
 
 function getFormInfo() {
-    var infos = [];
+    let infos = [];
     infos.type = $('#resultType').val();
     infos.lat = $('#latForm').val();
     infos.lng = $('#lngForm').val();
     infos.date = $('#dateInput').val() /*.pickadate()*/;
     infos.time = $('#timeInput').val();
     infos.desc = $('#descEvent').val();
-    var currLat = $('#coordsData').attr('data-lat');
-    var currLong = $('#coordsData').attr('data-long');
+    let currLat = $('#coordsData').attr('data-lat');
+    let currLong = $('#coordsData').attr('data-long');
 
     if (infos.lat != null && infos.lng != null){
         if (!isNaN(parseFloat(infos.lat))
@@ -47,9 +46,7 @@ function getFormInfo() {
         }
     }
 
-    var notif = new Notification(null, null, infos.type, infos.desc, infos.date, infos.time, currLat, currLong, null);
-
-    return notif;
+    return new Notification(null, null, infos.type, infos.desc, infos.date, infos.time, currLat, currLong, null);
 }
 
 function clearForm() {
@@ -59,7 +56,7 @@ function clearForm() {
 
 function addMarker(notif) {
 
-    var infowindowData =
+    let infowindowData =
         "<p>Type: " + notif.type + "</p>"+
         "<p>Description: " + notif.desc + "</p>"+
         "<p>Date: " + notif.date + "</p>"+
@@ -67,20 +64,20 @@ function addMarker(notif) {
         "<p>Où: " + notif.coord + "</p>"+
         "<p id='incrementor'><img id='thumbUp' src='media/thumbUp.png' alt=''><img id='thumbDown' src='media/thumbDown.png' alt=''></p>";
 
-    var infowindowShortData =
+    let infowindowShortData =
         "<p>Type: " + notif.type + "</p>"+
         "<p>Description: " + notif.desc + "</p>"+
         "<p>Confirmations: " + notif.nbConf + "</p>";
 
-    var infowindow = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, -30)});
+    let infowindow = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, -30)});
     infowindow.setContent(infowindowData);
     infowindow.setPosition(notif.coord);
 
-    var infowindowShort = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, -30)});
+    let infowindowShort = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, -30)});
     infowindowShort.setContent(infowindowShortData);
     infowindowShort.setPosition(notif.coord);
 
-    var marker = new google.maps.Data.Feature({
+    let marker = new google.maps.Data.Feature({
         geometry: notif.coord,
         properties: {
             infoWindow: infowindow,
