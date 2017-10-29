@@ -2,15 +2,31 @@ function loadListeners() {
 
     $('.typeSelection').click(function () {
         $('.typeSelection').removeClass('active');
+        $('.typeSelection').parent().css({"color": "initial", "font-weight": "initial"});
         let id = $(this).attr('id');
         $('#resultType').val(id);
         $(this).addClass('active');
+        $(this).parent().css({"color": "#00B4D4", "font-weight": "bold"});
     });
 
     $('#addEvent').click(function () {
         $('#optionalSearchInput').show();
-        $('#latLngInput').show();
-        $('#addNotif').modal('open');
+        $('#addNotif').css("height", "80%").modal('open');
+    });
+
+    $('#coordChoice').find('input[type=radio]').click(function () {
+        let $optionalAddressInput = $('#optionalAddressInput');
+        let $optionnalLatLngInput = $('#optionnalLatLngInput');
+        switch ($(this).attr('id')) {
+            case 'address':
+                $optionalAddressInput.show();
+                $optionnalLatLngInput.hide();
+                break;
+            case 'gps':
+                $optionnalLatLngInput.show();
+                $optionalAddressInput.hide();
+                break
+        }
     });
 
     map.addListener('dblclick', function (event) {
@@ -21,21 +37,18 @@ function loadListeners() {
         $coordsData.attr("data-lat", ''+latLng.lat());
         $coordsData.attr("data-long", ''+latLng.lng());
         this.panTo(latLng);
-        $('#addNotif').modal('open');
+        $('#addNotif').css("height", "55%").modal('open');
     });
 
 // Save button fetch form information & adds marker
     $('#saveModal').click(function () {
         let notification = getFormInfo();
         addMarker(notification);
-        $('#addNotif').modal('close');
         clearForm();
-        console.log(notification);
     });
 
 // Cancel button closes modal dialog box
     $('#cancelModal').click(function () {
-        $('#addNotif').modal('close');
         clearForm();
     });
 

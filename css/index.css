@@ -13,33 +13,93 @@ html, body {
 }
 
 /*******************************  MODAL CONTENT  *******************************/
+
+#addNotif {
+    height: 55%;
+    width: 40%;
+}
+
+.modal-content {
+    height: 100% !important;
+}
+
+.modal-content h4 {
+    text-align: center;
+    margin-bottom: 5%;
+}
+
 .typeSelection {
     display: inline-block;
-    height: 50px;
-    width: 50px;
-    border-radius: 10px;
+    height: 60px;
+    width: 60px;
+    border-radius: 40px;
     margin: 0 15px;
-    border: 2px solid #000;
+    border: 3px solid #000;
+    box-shadow: 1px 1px 8px #000;
+    padding: 2px;
+    cursor: pointer;
 }
 
-.typeSelection:hover {
-    filter: contrast(200%) brightness(150%);
-    border: 2px solid blue;
+.typeSelection:hover, .typeSelection.active {
+    border: 3px solid #00B4D4;
 }
 
-.typeSelection.active {
-    border: 2px solid blue;
+.typeSelection:active {
+    transform: scale(1.1);
 }
 
 #imgTypes {
     display: flex;
     justify-content: space-around;
+    margin-bottom: 20px;
 }
 
-#addNotif textarea {
+#imgTypes label {
+    display: inline-grid;
+    text-align: center;
+    line-height: 35px;
+    color: #000;
+}
+
+#dateInput, #timeInput {
+    display: inline-block;
+}
+
+#descEvent {
+    height: 100px;
     resize: none;
 }
 
+#coordChoice {
+    display: flex;
+    justify-content: space-evenly;
+}
+#coordChoice p {
+    display: inline-block;
+    margin: 0;
+}
+
+
+#saveModal {
+    background-color: rgba(50,153,50,0.7);
+}
+
+#saveModal:hover {
+    background-color: rgba(50,153,50,1);
+}
+
+#cancelModal {
+    background-color: rgba(204,0,0,0.7);
+}
+
+#cancelModal:hover {
+    background-color: rgba(204,0,0,1);
+}
+
+.modal-footer {
+    display: flex;
+    justify-content: space-evenly;
+}
 /*******************************  SEARCH PLACES INPUT  *******************************/
 
 .controls {
@@ -84,8 +144,8 @@ html, body {
     bottom: 15px;
     left: 50%;
     margin-left: -40px;
-    width: 80px;
-    height: 80px;
+    width: 65px;
+    height: 65px;
     box-shadow: 3px 3px 10px #000;
     opacity: 0.8;
 }
@@ -96,9 +156,8 @@ html, body {
 }
 
 #addEvent i {
-    font-style: normal;
-    line-height: 80px;
-    font-size: 3.5rem;
+    line-height: 65px;
+    font-size: 3rem;
 }
 
 /*******************************  FILTERS TOGGLABLE TAB  *******************************/

@@ -21,6 +21,7 @@ $(document).ready(function () {
         autoclose: true, // automatic close timepicker
         ampmclickable: true, // make AM PM clickable
     });
+
 });
 
 function getFormInfo() {
@@ -34,7 +35,7 @@ function getFormInfo() {
     let currLat = $('#coordsData').attr('data-lat');
     let currLong = $('#coordsData').attr('data-long');
 
-    if (infos.lat != null && infos.lng != null){
+    if (infos.lat != "" && infos.lng != ""){
         if (!isNaN(parseFloat(infos.lat))
             && !isNaN(parseFloat(infos.lng))
             && parseFloat(infos.lat) >= -90
