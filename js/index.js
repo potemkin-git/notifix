@@ -32,6 +32,7 @@ function getFormInfo() {
     infos.date = $('#dateInput').val() /*.pickadate()*/;
     infos.time = $('#timeInput').val();
     infos.desc = $('#descEvent').val();
+    $('#descEvent').trigger('autoresize');
     let currLat = $('#coordsData').attr('data-lat');
     let currLong = $('#coordsData').attr('data-long');
 
@@ -57,20 +58,29 @@ function clearForm() {
 
 function addMarker(notif) {
 
-    let infowindowData =
+    let editable = (notif.userId == userId) ? '<a id="editNotif" class="btn-floating"><i class="material-icons">edit</i></a>' : "";
+
+    let menu = '<a id="thumbUp" class="btn-floating green"><i class="material-icons">sentiment_very_satisfied</i></a>' +
+               '<a id="thumbDown" class="btn-floating red"><i class="material-icons">sentiment_very_dissatisfied</i></a>' +
+                editable;
+
+    let infowindowData = "<div class='infowindow'>"+
+        "<p>Event type: " + notif.type + "</p>"+
+        "<p>" + notif.desc + "</p>"+
+        "<p>Date: " + notif.date + "  &  Time: " + notif.time +"</p>"+
+        "<p id='iw-menu'>" + menu + "</p>" +
+        "</div>";
+
+//         <a href="#!" id="saveModal" class="modal-action modal-close waves-effect waves-green btn"><i class="medium material-icons left">check_circle</i>Save</a>
+
+
+    let infowindowShortData = "<div class='infowindowShort'>"+
         "<p>Type: " + notif.type + "</p>"+
         "<p>Description: " + notif.desc + "</p>"+
-        "<p>Date: " + notif.date + "</p>"+
-        "<p>Time: " + notif.time + "</p>"+
-        "<p>Où: " + notif.coord + "</p>"+
-        "<p id='incrementor'><img id='thumbUp' src='media/thumbUp.png' alt=''><img id='thumbDown' src='media/thumbDown.png' alt=''></p>";
+        "<p>Confirmations: " + notif.nbConf + "</p>"+
+        "</div>";
 
-    let infowindowShortData =
-        "<p>Type: " + notif.type + "</p>"+
-        "<p>Description: " + notif.desc + "</p>"+
-        "<p>Confirmations: " + notif.nbConf + "</p>";
-
-    let infowindow = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, -30)});
+    let infowindow = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, -30), maxWidth: 350});
     infowindow.setContent(infowindowData);
     infowindow.setPosition(notif.coord);
 

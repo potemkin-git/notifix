@@ -17,7 +17,7 @@
 
 <body>
 
-<a id="addEvent" class="btn-floating waves-effect waves-light red" title="Something happened?"><i class="material-icons">add</i></a>
+<a id="addEvent" class="btn-floating waves-effect waves-light red tooltipped" data-position="top" data-delay="50" data-tooltip="Declare an incident" ><i class="material-icons">add</i></a>
 
 <nav id="toggleFilter">
     <img id="toggleFilterBtn" src="media/toggleBtn.png" alt="">
@@ -79,15 +79,15 @@
                 </div>
                 <div class="row">
                     <div class="input-field col s10 offset-s1">
-                        <textarea placeholder="Description" id="descEvent" type="text" wrap="hard"></textarea>
+                        <textarea placeholder="Description" id="descEvent" class="materialize-textarea" type="text" wrap="hard" data-length="100"></textarea>
                     </div>
                 </div>
             </form>
         </div>
     </div>
     <div class="modal-footer">
-        <button id="saveModal" class="modal-action modal-close waves-effect waves-green btn"><i class="medium material-icons left">check_circle</i>Save</button>
-        <button id="cancelModal" class="modal-action modal-close waves-effect waves-red btn"><i class="medium material-icons left">cancel</i>Cancel</button>
+        <a href="#!" id="saveModal" class="modal-action modal-close waves-effect waves-green btn"><i class="medium material-icons left">check_circle</i>Save</a>
+        <a href="#!" id="cancelModal" class="modal-action modal-close waves-effect waves-red btn"><i class="medium material-icons left">cancel</i>Cancel</a>
     </div>
 </div>
 

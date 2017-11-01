@@ -1,4 +1,4 @@
-var map, infoopened, infoclosed = true;
+var map, infoopened, infoclosed = true, userId = 42;
 var jamLayer, accidentLayer, policeLayer, masterLayer = [];
 
 // initMap();
@@ -21,7 +21,7 @@ function locateMe() {
             console.warn(`ERROR(${err.code}): ${err.message}`);
         });
     } else {
-        console.log("Geolocation disabled");
+        console.log("Browser Geolocation unavailable");
     }
 }
 
@@ -113,6 +113,12 @@ function initLayers() {
                 $('#thumbDown').click(function () {
                     notif.nbConf--;
                 });
+            });
+
+            google.maps.event.addListener(map, 'click', function() {
+                infowindow.close();
+                infoclosed = true;
+
             });
 
             google.maps.event.addListener(infowindow, 'closeclick', function () {

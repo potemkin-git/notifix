@@ -58,14 +58,17 @@ function loadListeners() {
         let $filterCheckbox = $('#filterCheckbox');
 
         if ($toggleFilter.hasClass('active')) {
-            $toggleFilter.animate({width: "10px"}, 300);
+            $toggleFilter.animate({width: "10px"}, 600);
             $toggleFilter.removeClass('active');
             $filterCheckbox.hide();
             $(this).css({transform: "rotate(0deg)", right: "-17px", "height":"30px", "margin-top":"-15px"});
         } else {
-            $toggleFilter.animate({width: "170px"}, 300);
+            $toggleFilter.animate({width: "170px"}, 600);
             $toggleFilter.addClass('active');
-            $filterCheckbox.css("display", "flex");
+            $filterCheckbox.delay(400).queue(function (next) {
+                $(this).css("display", "flex");
+                next();
+            });
             $(this).css({"transform":"rotate(180deg)", "right":"-1px", "height":"20px", "margin-top":"-10px"});
         }
     });

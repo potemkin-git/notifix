@@ -65,11 +65,6 @@ html, body {
     display: inline-block;
 }
 
-#descEvent {
-    height: 100px;
-    resize: none;
-}
-
 #coordChoice {
     display: flex;
     justify-content: space-evenly;
@@ -208,15 +203,26 @@ html, body {
 
 /*******************************  THUMBS UP/DOWN IN INFOWINDOW  *******************************/
 
-#incrementor {
+#iw-menu {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
 }
 
-#incrementor img {
-    height: 30px;
-}
-
-#incrementor img:hover {
+#iw-menu a:hover {
     cursor: pointer;
+}
+
+/*******************************  INFOWINDOW OVERRIDE  *******************************/
+
+.infowindow, .infowindowShort {
+    text-align: center;
+    font-weight: bolder;
+}
+
+.infowindow {
+    width: 270px;
+}
+
+.infowindow p {
+    overflow-wrap: break-word;
 }
