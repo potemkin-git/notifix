@@ -1,12 +1,11 @@
 var map, infoopened, infoclosed = true, userId = 42;
 var jamLayer, accidentLayer, policeLayer, masterLayer = [];
 
-// initMap();
-
 function initMap() {
     map = new google.maps.Map(document.getElementById('map'), {
         zoom: 15,
-        streetViewControl: false,
+        streetViewControl : false,
+        fullscreenControl : false
     });
 
     initSearchBox(map);
@@ -111,7 +110,21 @@ function initLayers() {
                     notif.nbConf++;
                 });
                 $('#thumbDown').click(function () {
-                    notif.nbConf--;
+                    notif.nbDeny++;
+                });
+
+                // Button from infoWindow that opens the notification edition modal window
+                $('#editNotif').click(function () {
+                    clearForm();
+                    $('#optionalSearchInput').hide();
+                    $('.createMode').hide();
+                    $('.editMode').show();
+                    $('#addNotif').css("height", "55%").modal('open');
+                    $('#descEvent').text(notif.desc);
+                    $('#'+notif.type+'.typeSelection').addClass('active');
+                    $('#resultType').val(notif.type);
+                    $('#dateInput').val(notif.date);
+                    $('#timeInput').val(notif.time);
                 });
             });
 
@@ -127,8 +140,8 @@ function initLayers() {
         });
 
         layer.addListener('mouseover', function (elem) {
-            let infowindowShort = elem.feature.getProperty('infoWindowShort');
             if (!infoclosed) return;
+            let infowindowShort = elem.feature.getProperty('infoWindowShort');
             infowindowShort.open(map);
         });
 
@@ -139,5 +152,7 @@ function initLayers() {
 
     })
 }
+
+initMap();
 
 

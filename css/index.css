@@ -17,6 +17,7 @@ html, body {
 #addNotif {
     height: 55%;
     width: 40%;
+    border-radius: 15px;
 }
 
 .modal-content {
@@ -95,6 +96,14 @@ html, body {
     display: flex;
     justify-content: space-evenly;
 }
+
+/* MODAL WHILE EDITING */
+
+.editMode {
+    display: none;
+}
+
+
 /*******************************  SEARCH PLACES INPUT  *******************************/
 
 .controls {
@@ -138,21 +147,56 @@ html, body {
     position: absolute;
     bottom: 15px;
     left: 50%;
-    margin-left: -40px;
-    width: 65px;
-    height: 65px;
+    margin-left: -28px;
+    width: 56px;
+    height: 56px;
     box-shadow: 3px 3px 10px #000;
     opacity: 0.8;
 }
 
 #addEvent:hover {
     opacity: 1;
-    transform: scale(1.075);
+    transform: scale(1.1);
 }
 
 #addEvent i {
+    line-height: 56px;
+    font-size: 2.6rem;
+}
+
+/*******************************  MAIN MENU BUTTON  *******************************/
+
+.mainmenuDiv {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.mainmenuDiv ul {
+   width: 220px !important;
+}
+
+.mainmenuDiv li a {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 140px;
+}
+
+#mainmenuBtn {
+    width: 65px;
+    height: 65px;
+    box-shadow: 3px 3px 10px #000;
+    opacity: 0.8;
+}
+
+#mainmenuBtn i {
     line-height: 65px;
-    font-size: 3rem;
+    font-size: 2.3rem;
+}
+
+#mainmenuBtn:hover {
+    opacity: 1;
+    transform: scale(1.075);
 }
 
 /*******************************  FILTERS TOGGLABLE TAB  *******************************/
@@ -162,10 +206,10 @@ html, body {
     left: 0;
     top: 50%;
     width: 10px;
-    height: 320px;
-    margin-top: -160px;
+    height: 450px;
+    margin-top: -225px;
     background-color: #FFF;
-    z-index: 10000;
+    z-index: 100;
     border-radius: 0 20px 20px 0;
     box-shadow: 3px 4px 15px #323232;
 }
@@ -185,20 +229,20 @@ html, body {
 #filterCheckbox {
     display: none;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
     height: 100%;
 }
 
 #filterCheckbox p {
     color: #000;
     font-size: 13px;
-    text-align: center;
     margin: 0;
     line-height: 20px;
 }
 
-#filterCheckbox label {
+#filterCheckbox p, #filterCheckbox label {
     text-align: center;
+    font-size: 1.1em;
 }
 
 /*******************************  THUMBS UP/DOWN IN INFOWINDOW  *******************************/

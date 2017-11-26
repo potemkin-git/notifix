@@ -1,5 +1,6 @@
 function loadListeners() {
 
+    // Notification creation modal window: sets an active Type display and stores the chosen id
     $('.typeSelection').click(function () {
         $('.typeSelection').removeClass('active');
         $('.typeSelection').parent().css({"color": "initial", "font-weight": "initial"});
@@ -9,11 +10,19 @@ function loadListeners() {
         $(this).parent().css({"color": "#00B4D4", "font-weight": "bold"});
     });
 
+    // Button that opens the notification creation modal window(additionnal fields + custom size)
     $('#addEvent').click(function () {
+        clearForm();
+        $('.createMode').show();
+        $('.editMode').hide();
         $('#optionalSearchInput').show();
+        if ($('#toggleFilter').hasClass('active')) {
+            $('#toggleFilterBtn').trigger('click');
+        }
         $('#addNotif').css("height", "80%").modal('open');
     });
 
+    // Switch between "place" or "lat+long coordinates" fields while adding a notification (from addEvent button)
     $('#coordChoice').find('input[type=radio]').click(function () {
         let $optionalAddressInput = $('#optionalAddressInput');
         let $optionnalLatLngInput = $('#optionnalLatLngInput');
@@ -29,7 +38,11 @@ function loadListeners() {
         }
     });
 
+    // Opens from map click the notification creation modal window (location is automatically set + reduced size)
     map.addListener('dblclick', function (event) {
+        clearForm();
+        $('.createMode').show();
+        $('.editMode').hide();
         $('#optionalSearchInput').hide();
         $('#latLngInput').hide();
         let latLng = event.latLng;
@@ -37,6 +50,9 @@ function loadListeners() {
         $coordsData.attr("data-lat", ''+latLng.lat());
         $coordsData.attr("data-long", ''+latLng.lng());
         this.panTo(latLng);
+        if ($('#toggleFilter').hasClass('active')) {
+            $('#toggleFilterBtn').trigger('click');
+        }
         $('#addNotif').css("height", "55%").modal('open');
     });
 
@@ -44,15 +60,9 @@ function loadListeners() {
     $('#saveModal').click(function () {
         let notification = getFormInfo();
         addMarker(notification);
-        clearForm();
     });
 
-// Cancel button closes modal dialog box
-    $('#cancelModal').click(function () {
-        clearForm();
-    });
-
-// Pull/push for the filter sidebar
+// Filter sidebar Pull/Push
     $('#toggleFilterBtn').click(function () {
         let $toggleFilter = $('#toggleFilter');
         let $filterCheckbox = $('#filterCheckbox');
@@ -60,16 +70,20 @@ function loadListeners() {
         if ($toggleFilter.hasClass('active')) {
             $toggleFilter.animate({width: "10px"}, 600);
             $toggleFilter.removeClass('active');
-            $filterCheckbox.hide();
-            $(this).css({transform: "rotate(0deg)", right: "-17px", "height":"30px", "margin-top":"-15px"});
+            $filterCheckbox.delay(150).queue(function (next) {
+                $(this).hide();
+                next();
+            });
+            // $filterCheckbox.hide();
+            $(this).css({transform: "rotate(0deg)", right: "-17px"});
         } else {
-            $toggleFilter.animate({width: "170px"}, 600);
+            $toggleFilter.animate({width: "300px"}, 600);
             $toggleFilter.addClass('active');
-            $filterCheckbox.delay(400).queue(function (next) {
+            $filterCheckbox.delay(200).queue(function (next) {
                 $(this).css("display", "flex");
                 next();
             });
-            $(this).css({"transform":"rotate(180deg)", "right":"-1px", "height":"20px", "margin-top":"-10px"});
+            $(this).css({"transform":"rotate(180deg)", "right":"-1px"});
         }
     });
 
@@ -96,6 +110,15 @@ function loadListeners() {
         } else {
             policeLayer.setMap(null);
         }
+    });
+
+    // Menu actions
+    $('#loginBtn').click(function () {
+        window.location.replace("login.html");
+    });
+
+    $('#settingsBtn').click(function () {
+
     });
 }
 

@@ -21,7 +21,6 @@ $(document).ready(function () {
         autoclose: true, // automatic close timepicker
         ampmclickable: true, // make AM PM clickable
     });
-
 });
 
 function getFormInfo() {
@@ -53,6 +52,7 @@ function getFormInfo() {
 
 function clearForm() {
     $('#formNotif')[0].reset();
+    $('#descEvent').empty();
     $('.typeSelection').removeClass('active');
 }
 
@@ -71,13 +71,11 @@ function addMarker(notif) {
         "<p id='iw-menu'>" + menu + "</p>" +
         "</div>";
 
-//         <a href="#!" id="saveModal" class="modal-action modal-close waves-effect waves-green btn"><i class="medium material-icons left">check_circle</i>Save</a>
-
-
     let infowindowShortData = "<div class='infowindowShort'>"+
         "<p>Type: " + notif.type + "</p>"+
         "<p>Description: " + notif.desc + "</p>"+
-        "<p>Confirmations: " + notif.nbConf + "</p>"+
+        "<p>Approved by " + notif.nbConf + " people</p>"+
+        "<p>Disapproved by " + notif.nbDeny + " people</p>"+
         "</div>";
 
     let infowindow = new google.maps.InfoWindow({pixelOffset: new google.maps.Size(0, -30), maxWidth: 350});

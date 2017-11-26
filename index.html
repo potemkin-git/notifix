@@ -13,11 +13,25 @@
     <script src="vendors/jquery-ui.min.js"></script>
     <script src="vendors/materialize/js/materialize.min.js"></script>
 
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ8oRX_6L0YwjDwBEB8DvaBulOEA3r1ow&libraries=places"></script>
+
 </head>
 
 <body>
 
+
 <a id="addEvent" class="btn-floating waves-effect waves-light red tooltipped" data-position="top" data-delay="50" data-tooltip="Declare an incident" ><i class="material-icons">add</i></a>
+
+<div class="fixed-action-btn horizontal click-to-toggle mainmenuDiv">
+    <a id="mainmenuBtn" class="btn-floating btn-large spinner-blue">
+        <i class="material-icons">menu</i>
+    </a>
+    <ul>
+        <li><a id="loginBtn" class="waves-effect waves-light btn spinner-blue white-text"><i class="large material-icons left">account_box</i>Log in</a></li>
+        <li><a id="settingsBtn" class="waves-effect waves-light btn spinner-blue white-text"><i class="large material-icons left">settings</i>Account</a></li>
+    </ul>
+</div>
+
 
 <nav id="toggleFilter">
     <img id="toggleFilterBtn" src="media/toggleBtn.png" alt="">
@@ -39,7 +53,8 @@
 
 <div id="addNotif" class="modal modal-fixed-footer">
     <div class="modal-content">
-        <h4>What did you notice?</h4>
+        <h4 class="createMode">What did you notice?</h4>
+        <h4 class="editMode">Edit my notification</h4>
         <div class="row">
             <form id="formNotif" class="col s12" action="#">
 
@@ -96,7 +111,6 @@
 <script src="js/index.js"></script>
 <script src="js/eventListeners.js"></script>
 <script src="js/init.js"></script>
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBQ8oRX_6L0YwjDwBEB8DvaBulOEA3r1ow&callback=initMap&libraries=places"></script>
 <script src="js/notification.js"></script>
 <script src="js/dataFakerLoadixRendererV1.js"></script>
 
