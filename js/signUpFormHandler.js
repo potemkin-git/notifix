@@ -17,6 +17,7 @@ $("#signup form").submit(function (event) {
 
     let msgError = "";
     let validInputs = false;
+    let allowed = false;
 
     if (fName == "" || lName == "" || login == "" || email == "" || pwd == "" || city == "" || address == "" ||  avatarSrc.indexOf('miss.jpg') != -1)
         msgError = "All fields are required";
@@ -30,16 +31,25 @@ $("#signup form").submit(function (event) {
 
     if (!validInputs || msgError != "") {
         $("#signUpErrorMsg").text(msgError).show();
-        event.preventDefault();
+    } else {
+        isLoginUsed(login).then(function (result) {
+            if (result == "200") {
+                $("#signUpErrorMsg").text("Login already used, please choose another").show();
+            } else {
+                registerUser(fName, lName, login, email, pwd, city, address, avatarSrc).then(function (result) {
+                    if (result == "200") {
+                        allowed = true;
+                        // @todo set cookie
+                    }
+                }).catch(function (err) {
+                    console.error('Error:' + err);
+                });
+            }
+        }).catch(function (err) {
+            console.error('Error:' + err);
+        });
     }
 
-
-
-
+    if (!allowed) event.preventDefault();
 });
 
-
-function validateEmail(email) {
-    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-    return re.test(email);
-}

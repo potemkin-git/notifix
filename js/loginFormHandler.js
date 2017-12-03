@@ -23,6 +23,7 @@ $("#login form").submit(function (event) {
                         $("#loginErrorMsg").text("Provided password does not match login").show();
                     } else {
                         allowed = true;
+                       // @todo set cookie
                     }
                 }).catch(function (err) {
                     console.error('Error:' + err);
@@ -38,17 +39,3 @@ $("#login form").submit(function (event) {
     if (!allowed) event.preventDefault();
 });
 
-
-// Call to WS checking if login exists
-function isLoginUsed(login) {
-    return new Promise(function (resolve, reject) {
-        // Ajax login validation check
-    });
-}
-
-// Call to WS checking if login matches provided password
-function loginPasswordMatch(login, pwd) {
-    return new Promise(function (resolve, reject) {
-        // Ajax login/pwd correspondance check
-    });
-}
