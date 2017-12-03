@@ -3,6 +3,7 @@ function blink_text() {
         $('.errMsg').fadeIn(300);
     });
 }
+
 setInterval(blink_text, 3000);
 
 $("#signup form").submit(function (event) {
@@ -19,7 +20,7 @@ $("#signup form").submit(function (event) {
     let validInputs = false;
     let allowed = false;
 
-    if (fName == "" || lName == "" || login == "" || email == "" || pwd == "" || city == "" || address == "" ||  avatarSrc.indexOf('miss.jpg') != -1)
+    if (fName == "" || lName == "" || login == "" || email == "" || pwd == "" || city == "" || address == "" || avatarSrc.indexOf('miss.jpg') != -1)
         msgError = "All fields are required";
     else if (login.length < 5)
         msgError = "Login must have 5 characters or more";
@@ -36,14 +37,24 @@ $("#signup form").submit(function (event) {
             if (result == "200") {
                 $("#signUpErrorMsg").text("Login already used, please choose another").show();
             } else {
-                registerUser(fName, lName, login, email, pwd, city, address, avatarSrc).then(function (result) {
-                    if (result == "200") {
-                        allowed = true;
-                        // @todo set cookie
+                isPasswordUsed(pwd).then(function (result) {
+                    if (result != "404") {
+                        $("#signUpErrorMsg").text("Login already used, please choose another").show();
+                    } else {
+                        registerUser(fName, lName, login, email, pwd, city, address, avatarSrc).then(function (result) {
+                            if (result == "200") {
+                                allowed = true;
+                                // @todo set cookie
+                            }
+                        }).catch(function (err) {
+                            console.error('Error:' + err);
+                        });
                     }
                 }).catch(function (err) {
                     console.error('Error:' + err);
                 });
+
+
             }
         }).catch(function (err) {
             console.error('Error:' + err);
