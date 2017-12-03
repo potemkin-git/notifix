@@ -41,3 +41,32 @@ $('.tab a').on('click', function (e) {
   $(target).fadeIn(600);
   
 });
+
+function openGrid() {
+    addMask();
+    $("html").scrollTop(0);
+    $('#avatarChoice').show();
+    $('#avatarChoice').css({"display":"flex", "justify-content":"center"});
+    $('#avatarChoice').empty();
+    $('#avatarChoice').prepend("<p>Choose your avatar!</p>");
+
+    for (i=1;i<20;i++) {
+        $('#avatarChoice').append("<img id='avatar"+i+"' src='/media/avatars/"+i+".png'>");
+    }
+
+    $('#avatarChoice img').click(function () {
+        let src = $(this).attr('src');
+        $('#avaThumb').attr('src', src);
+        $('#avatarChoice').hide();
+        $('#mask').remove();
+
+        $('html, body').animate({
+            scrollTop: $("#avaThumb").offset().top
+        }, 500);
+    });
+}
+
+function addMask() {
+    $('html').append("<div id='mask'></div>");
+    $('#mask').css({"position":"fixed", "top":"0", "left":"0", "width":"100vw", "height":"100vh", "background-color":"rgba(0,0,0,0.8)"});
+}

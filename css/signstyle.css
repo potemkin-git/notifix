@@ -73,7 +73,7 @@ h1 {
   text-align: center;
   color: #ffffff;
   font-weight: 300;
-  margin: 0 0 40px;
+  margin: 0 0 25px;
 }
 
 label {
@@ -86,7 +86,7 @@ label {
   transition: all 0.25s ease;
   -webkit-backface-visibility: hidden;
   pointer-events: none;
-  font-size: 22px;
+  font-size: 18px;
 }
 label .req {
   margin: 2px;
@@ -108,7 +108,7 @@ label.highlight {
 }
 
 input, textarea {
-  font-size: 22px;
+  font-size: 18px;
   display: block;
   width: 100%;
   height: 100%;
@@ -183,15 +183,62 @@ textarea {
   position: initial;
 }
 
-.avatar input {
-  width: 80px;
-  height: 80px;
-  background-color: #FFF;
+#btnAvatar {
+  margin-top: 10px;
+  font-size: 0.8em;
 }
 
-.avatarChoice {
+#btnAvatar:hover {
+  cursor: pointer;
+  background: #179b77;
+}
+
+#avaThumb {
+  display: block;
+  margin: auto;
   margin-top: 10px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
+  height: 80px;
+  width: 80px;
+  padding: 0;
+}
+
+#avatarChoice {
+    display: none;
+    position: absolute;
+    justify-content: center;
+    flex-wrap: wrap;
+    left: 50%;
+    top: 10%;
+    width: 600px;
+    border-radius: 20px;
+    margin-left: -300px;
+    z-index: 300;
+}
+
+#avatarChoice p{
+    color: #FFF;
+    width: 100%;
+    text-align: center;
+    font-size: 2em;
+}
+
+#avatarChoice img {
+    height: 80px;
+    width: 80px;
+    padding: 8px;
+    border: 2px solid #FFF;
+    border-radius: 40px;
+    margin: 15px;
+}
+
+#avatarChoice img:hover {
+    cursor: pointer;
+    border-color: #179b77;
+}
+
+.errMsg {
+    text-align: center;
+    color: red;
+    font-size: 15px;
+    font-weight: bold;
 }
