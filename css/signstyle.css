@@ -7,7 +7,7 @@ html {
 }
 
 body {
-  background-image: url("/media/signBackgnd.png");
+  background-image: url("../media/signBackgnd.png");
   background-repeat: no-repeat;
   background-attachment: fixed;
   font-family: 'Titillium Web', sans-serif;
