@@ -41,7 +41,8 @@ $("#signup form").submit(function (event) {
                     if (result != "404") {
                         $("#signUpErrorMsg").text("Login already used, please choose another").show();
                     } else {
-                        registerUser(fName, lName, login, email, pwd, city, address, avatarSrc).then(function (result) {
+
+                        registerUser(new User(null, fName, lName, login, email, pwd, city, address, avatarSrc)).then(function (result) {
                             if (result == "200") {
                                 allowed = true;
                                 // @todo set cookie

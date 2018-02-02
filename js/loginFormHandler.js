@@ -6,36 +6,24 @@ function blink_text() {
 setInterval(blink_text, 3000);
 
 
-$("#login form").submit(function (event) {
-    const login = $("#login form input[type=text]").val();
-    const pwd = $("#login form input[type=password]").val();
-    let allowed = false;
-    let msgError = "";
-
-    if (login != "" && pwd != "") {
-
-        isLoginUsed(login).then(function (result) {
-            if (result == "404") {
-                $("#loginErrorMsg").text("We did not find your login in our database").show();
-            } else {
-                loginPasswordMatch(login, pwd).then(function (result) {
-                    if (result == "403") {
-                        $("#loginErrorMsg").text("Provided password does not match login").show();
-                    } else {
-                        allowed = true;
-                       // @todo set cookie
-                    }
-                }).catch(function (err) {
-                    console.error('Error:' + err);
-                });
+function loginSubmit() {
+    const login = $("#login #loginInput").val();
+    const pwd = $("#login #pwdInput").val();
+    if (login !== "" && pwd !== "") {
+        console.log(login);
+        console.log(pwd);
+        loginPasswordMatch(login, pwd).done(function (result) {
+            console.log(result);
+            if (result === 403) {
+                $("#loginErrorMsg").text("Invalid login and/or password").show();
+            } else if (result === 200) {
+                $("#loginErrorMsg").text("").hide();
+                // @todo set cookie
+                window.location.href='index.html';
             }
-        }).catch(function (err) {
-            console.error('Error:' + err);
         });
     } else {
         $("#loginErrorMsg").text("Login and password are required to log in !").show();
     }
-
-    if (!allowed) event.preventDefault();
-});
+}
 

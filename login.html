@@ -25,29 +25,24 @@
         <div id="login">
             <h1>Welcome Back!</h1>
             <p id="loginErrorMsg" class="errMsg"> </p>
-            <form action="javascript:window.location.href='index.html'" method="post">
-
                 <div class="field-wrap">
                     <label>
                         Login<span class="req">*</span>
                     </label>
-                    <input type="text" autocomplete="off"/>
+                    <input id="loginInput" type="text" autocomplete="off"/>
                 </div>
 
                 <div class="field-wrap">
                     <label>
                         Password<span class="req">*</span>
                     </label>
-                    <input type="password" autocomplete="off"/>
+                    <input id="pwdInput" type="password" autocomplete="off"/>
                 </div>
 
                 <p class="forgot"><a href="#">Forgot Password?</a></p>
 
-                <button type="submit" class="button button-block"/>
+                <button type="button" class="button button-block" onclick="loginSubmit()"/>
                 Log In</button>
-
-            </form>
-
         </div>
 
         <div id="signup">

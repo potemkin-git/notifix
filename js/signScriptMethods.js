@@ -1,4 +1,4 @@
-
+var baseUrl = "http://localhost:62002/notifix/api/";
 // Call to WS checking if login exists
 function isLoginUsed(login) {
     return new Promise(function (resolve, reject) {
@@ -15,9 +15,7 @@ function isPasswordUsed(login) {
 
 // Call to WS checking if login matches provided password
 function loginPasswordMatch(login, pwd) {
-    return new Promise(function (resolve, reject) {
-        // @todo Ajax login/pwd correspondance check
-    });
+    return $.post( baseUrl+ "checklogin", "="+JSON.stringify({'login': login , 'password': pwd}));
 }
 
 function validateEmail(email) {
@@ -25,7 +23,7 @@ function validateEmail(email) {
     return re.test(email);
 }
 
-function  registerUser(fName, lName, login, email, pwd, city, address, avatarSrc) {
+function  registerUser(user) {
     return new Promise(function (resolve, reject) {
         // @todo Persist user info in DB
     });
